@@ -48,7 +48,16 @@ class MarcaController extends Controller
      */
     public function show(Marca $marca)
     {
-        //
+        /*
+        Forma mais extensa
+
+        $marcaId = Marca::find($marca);
+        return $marcaId;
+        */
+
+        //forma mais simples
+
+        return $marca;
     }
 
     /**
