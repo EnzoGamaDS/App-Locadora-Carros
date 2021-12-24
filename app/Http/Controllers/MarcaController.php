@@ -49,7 +49,7 @@ class MarcaController extends Controller
     public function show(Marca $marca)
     {
         /*
-        Forma mais extensa
+        // *******************Forma mais extensa***********************
 
         $marcaId = Marca::find($marca);
         return $marcaId;
@@ -80,7 +80,8 @@ class MarcaController extends Controller
      */
     public function update(Request $request, Marca $marca)
     {
-        //
+        $marca->update($request->all());
+        return $marca;
     }
 
     /**
