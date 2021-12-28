@@ -65,7 +65,11 @@ class MarcaController extends Controller
         //forma mais simples
         $marca = $this->marca->find($id);
 
-        return $marca;
+        if ($marca == '') {
+            return ['erro' => 'recurso pesquisado não existe'];
+        }else {
+            return $marca;
+        }
     }
 
     /**
@@ -88,22 +92,30 @@ class MarcaController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // $marca->update($request->all());
        $marca = $this->marca->find($id);
-       $marca->update($request->all());
-        return $marca;
+       if ($marca == '') {
+           return ['erro' => 'Essa marca não existe, impossivel atualizar'];
+       }else{
+        $marca->update($request->all());
+            return $marca;
+       }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function destroy($id)
     {
         $marca = $this->marca->find($id);
-        $marca->delete();
-        return ['msg' => 'Marca deletada']; 
+        if ($marca == '') {
+            return ['Essa marca não existe ou já foi deletada'];
+        }else{
+            $marca->delete();
+            return ['msg' => 'Marca deletada']; 
+        }
     }
 }
