@@ -44,19 +44,11 @@ class MarcaController extends Controller
     {
         //$marca =Marca::create($request->all());
         //validando parametros nome e imagem
-        $regras = [
-            'nome' => 'required|unique:marcas',
-            'imagem' => 'required'
-        ];
 
-        $feedback = [
-            'required' => 'O campo é obrigatório',
-            'nome.unique' => 'O nome da marca já existe'
-        ];
-
-        $request->validate($regras, $feedback);
+        $request->validate($this->marca->rules(), $this->marca->feedback());
 
         $marca = $this->marca->create($request->all());
+
          return response()->json($marca, 201);
     }
 
