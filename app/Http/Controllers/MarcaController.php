@@ -98,12 +98,13 @@ class MarcaController extends Controller
     public function update(Request $request, $id)
     {
        $marca = $this->marca->find($id);
+       
        if ($marca == '') {
            return response()->json(['erro' => 'Essa marca não existe, impossivel atualizar'], 404);
-       }else{
+       }
+        $request->validate($marca->rules(),$marca->feedback());
         $marca->update($request->all());
             return response()->json($marca, 200);
-       }
 
     }
 
